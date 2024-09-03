@@ -1,0 +1,9 @@
+<div class="center-content">
+  <h2 class="title">Editar Reseña</h2>
+
+  <% if user_signed_in? %>
+    <%= render 'form_edit' %>
+  <% else %>
+    <h2 class="subtitle">Debes ingresar/registrarte para editar la reseña</h2>
+  <% end %>
+</div>

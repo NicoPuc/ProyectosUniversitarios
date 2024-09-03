@@ -1,0 +1,37 @@
+<%= form_with model: @actividad do |form| %>
+    <% @actividad.errors.full_messages.each do |error|%>
+        <div>
+        <%= error%>
+        </div>
+    <%end%>
+
+    <div>
+        <%= form.label :titulo%>
+    </div>
+    <div>
+        <%= form.text_field :titulo%>
+    </div>
+
+    <div>
+        <%= form.label :cantidad_personas%>
+    </div>
+    <div>
+        <%= form.number_field :cantidad_personas%>
+    </div>
+
+    <div>
+        <%= form.label :precio%>
+    </div>
+    <div>
+        <%= form.number_field :precio%>
+    </div>
+
+    <div>
+        <%= form.label :fecha%>
+    </div>
+    <div>
+        <%= form.date_field :fecha%>
+    </div>
+
+    <%= form.submit %>
+<% end %>

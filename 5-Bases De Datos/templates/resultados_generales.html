@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados de la Consulta</title>
+</head>
+<body>
+    <h1>Resultados de la Consulta</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                {% for columna in nombres_columnas %}
+                    <th>{{ columna }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in resultados %}
+                <tr>
+                    {% for col in row %}
+                        <td>{{ col }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="/" class="volver">Volver</a>
+</body>
+</html>

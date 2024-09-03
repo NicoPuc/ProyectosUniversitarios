@@ -1,0 +1,20 @@
+<h1>Nueva Solicitud de Actividad</h1>
+
+<%= form_for [@actividad, Request.new] do |f| %>
+  <div class= "field" >
+    <%= f.label :actividad_id, "Actividad" %>
+    <%= f.collection_select :actividad_id, Actividad.all, :id, :tiutulo, class: "input" %>
+  </div>
+
+  <div class= "field" >
+    <%= f.label :description %>
+    <%= f.text_field :description, class: "input" %>
+  </div>
+
+  <div class= "field" >
+    <%= f.label :activity_date %>
+    <%= f.date_field :activity_date, class: "input" %>
+  </div>
+
+  <%= f.submit "Enviar Solicitud" %>
+<% end %>

@@ -1,0 +1,56 @@
+<div class="center-content">
+  <br>
+  <h2 class= "title" style="font-size: 4vh;">Registrarse</h2>
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <div class="field">
+      <%= f.label :Nombre %><br />
+      <em style="font-size: 2vh;">(<%= 10 %> caracteres mínimo)</em>
+      <br />
+      <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "input" %>
+    </div>
+
+    <div class="field">
+      <br>
+      <%= f.label :Descripción %><br />
+      <%= f.text_field :description, autofocus: true, autocomplete: "description", class: "input" %>
+    </div>
+
+    <div class="field">
+      <br>
+      <%= f.label :Número_de_teléfono %><br />
+      <%= f.number_field :phone, autofocus: true, autocomplete: "phone", class: "input" %>
+    </div>
+
+    <div class="field">
+      <br>
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input" %>
+    </div>
+
+    <div class="field">
+      <br>
+      <%= f.label :Contraseña %><br />
+      <% if @minimum_password_length %>
+      <em style="font-size: 2vh;">(<%= 10 %> caracteres mínimo)</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "new-password", class: "input" %>
+    </div>
+
+      <div class="field">
+      <br>
+        <%= f.label :Confirmar_Contraseña %> <br>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input" %>
+      </div>
+
+    <div class="actions">
+      <br>
+    <button type="submit" class="Btn thick-btn">Registrarse
+    </button>
+    </div>
+  <% end %>
+  <%= render "devise/shared/links" %>
+
+</div>

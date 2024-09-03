@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+    <title>Grupo 65</title>
+</head>
+
+<body>
+    <video autoplay muted loop id="video-fondo">
+        <source src="/static/1118553_4k_Form_Graphic_1280x720.mp4" type="video/mp4">
+        Tu navegador no soporta el video HTML5.
+    </video>
+    <div class="content">
+        <h1>Busquedas especificas</h1>
+        <div class="form-container">
+            <div class="form-box">
+                <h3>Buscar restaurantes por plato</h3>
+                <form action="/primera/" method="post">
+                    <div class="field is-grouped">
+                        <label class="label">Plato:</label>
+                        <div class="control">
+                            <input class="input is-success" type="text" name="plato">
+                        </div>
+                        <div class="control">
+                            <input class="button is-success is-light" type="submit" value="Submit">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="form-box">
+                <h3>Buscar pedidos por cliente y su gasto mensual</h3>
+                <form action="/busqueda/avanzada/pedidos_por_cliente_gasto_mensual/" method="post">
+                    <div class="field is-grouped">
+                        <label class="label">Correo:</label>
+                        <div class="control">
+                            <input class="input is-success" type="text" name="Correo">
+                        </div>
+                        <div class="control">
+                            <input class="button is-success is-light" type="submit" value="Submit">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="form-box">
+                <h3>Buscar pedidos por cliente</h3>
+                <form action="/busqueda/avanzada/pedidos_por_cliente/" method="post">
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <input class="button is-success is-light" type="submit" value="Submit">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="form-box">
+                <h3>Buscar platos, restaurantes y delivery por estilo</h3>
+                <form action="/busqueda/avanzada/platos_restaurantes_delivery_by_style/" method="post">
+                    <div class="field is-grouped">
+                        <label class="label">Estilo:</label>
+                        <div class="control">
+                            <input class="input is-success" type="text" name="Estilo">
+                        </div>
+                        <div class="control">
+                            <input class="button is-success is-light" type="submit" value="Submit">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="form-box">
+                <h3>Buscar plato por estilo</h3>
+                <form action="/busqueda/avanzada/platos_por_estilo/" method="post">
+                    <div class="field is-grouped">
+                        <label class="label">Estilo:</label>
+                        <div class="control">
+                            <input class="input is-success" type="text" name="estilo">
+                        </div>
+                        <div class="control">
+                            <input class="button is-success is-light" type="submit" value="Submit">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="form-box">
+                <h3>Buscar restaurantes por cliente con suscripción</h3>
+                <form action="/busqueda/avanzada/restaurantes_por_cliente_con_suscripcion/" method="post">
+                    <div class="field is-grouped">
+                        <label class="label">Correo:</label>
+                        <div class="control">
+                            <input class="input is-success" type="text" name="Correo">
+                        </div>
+                        <div class="control">
+                            <input class="button is-success is-light" type="submit" value="Submit">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="form-box">
+                <h3>Buscar suma de dinero por cada cliente en pedidos sin suscripción</h3>
+                <form action="/busqueda/avanzada/suma_clientes_sin_suscripcion/" method="post">
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <input class="button is-success is-light" type="submit" value="Submit">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="form-box">
+                <h3>Buscar todos los platos y sus respectivos restaurantes</h3>
+                <form action="/busqueda/avanzada/platos_con_restaurantes/" method="post">
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <input class="button is-success is-light" type="submit" value="Submit">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="form-box">
+                <h3>Buscar cliente, delivery y despachador por rating mínimo</h3>
+                <form action="/busqueda/avanzada/cliente_delivery_despachador_por_rating_min/" method="post">
+                    <div class="field is-grouped">
+                        <label class="label">Rating:</label>
+                        <div class="control">
+                            <input class="input is-success" type="text" name="Rating">
+                        </div>
+                        <div class="control">
+                            <input class="button is-success is-light" type="submit" value="Submit">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="form-box">
+                <h3>Buscar plato por alergia (para no morir)</h3>
+                <form action="/busqueda/avanzada/plato_por_alergia/" method="post">
+                    <div class="field is-grouped">
+                        <label class="label">Alergia:</label>
+                        <div class="control">
+                            <input class="input is-success" type="text" name="alergia">
+                        </div>
+                        <div class="control">
+                            <input class="button is-success is-light" type="submit" value="Submit">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <a href="/" class="volver">Volver</a>
+    </div>
+</body>
+
+</html>

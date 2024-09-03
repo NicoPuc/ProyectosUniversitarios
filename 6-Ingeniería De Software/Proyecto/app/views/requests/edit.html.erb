@@ -1,0 +1,8 @@
+<div class="center-content">
+<br><br>
+<% if user_signed_in? %>
+    <%= render 'form'%>
+<% else %>
+<h2>Debes ingresar/registrarte para editar la solicitud</h2>
+<% end %>
+</div>

@@ -1,0 +1,7 @@
+.env
+node_modules
+config/database.yml
+enunciados/
+tmp/
+Gemfile
+Gemfile.lock

@@ -1,0 +1,48 @@
+<% actividades_disponibles = Actividad.where.not(user: current_user)
+.where.not(id: Review.where(user: current_user).select(:actividad_id))
+%>
+<br><br>
+<h2 class="title">Crear Reseña</h2>
+
+<% if @review.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
+    <ul>
+      <% @review.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<br><br>
+<%= form_with(model: @review ) do |form| %>
+    <div class="field">
+      <%= form.label :actividad_id, "Actividad" %>
+      <%= form.collection_select :actividad_id, actividades_disponibles, :id, :titulo, class: "input" %>
+    </div>
+
+    <div class="field">
+      <br>
+      <%= form.label :rating %>
+      <%= form.number_field :rating, class: "input", autofocus: true, autocomplete: "rating" %>
+    </div>
+
+    <div class="field">
+      <br>
+      <%= form.label :content%>
+      <%= form.text_field :content, class: "input", style: "width: 250px; height: 20px;", autofocus: true,  autocomplete: "content" %>
+    </div>
+
+    <% user_id = current_user.id %>
+  
+    <br>
+    <div class="actions">
+      <button type="submit" class="Btn thick-btn">Crear Reseña
+        <svg class="svg" viewBox="0 0 24 24">
+          <line y2="19" y1="5" x2="12" x1="12"></line>
+          <line y2="12" y1="12" x2="19" x1="5"></line>
+        </svg>
+      </button>
+    </div>
+  <% end %>

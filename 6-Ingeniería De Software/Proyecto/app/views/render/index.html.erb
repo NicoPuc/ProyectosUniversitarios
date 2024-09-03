@@ -1,0 +1,28 @@
+<!-- app/views/home/index.html.erb -->
+<% if user_signed_in? %>
+  <ul class='ContainerIndex'>
+  <li>
+  <%= image_tag 'BS1.jpg', alt: 'Imagen1Index', class: 'ImagenIndex' %>
+  </li>
+  <li>
+    <p class='DescripcionIndex'>
+      Bienvenido a BrawlerHub <%= current_user.name %>! El lugar donde encontrarás a los compañeros que te llevarán a la victoria!
+    </p>
+  </li>
+  <li>
+    <p class='DescripcionIndex'>
+    En Actividades, podrás encontrar brawlers que estén buscando equipo para algún modo de juego. Ahí podrás ver qué brawler usará cada uno para encajar con el equipo perfecto.
+    </p>
+  </li>
+  <li>
+  <%= image_tag 'brawlers.jpg', alt: 'Imagen1Index', class: 'ImagenIndex' %>
+  </li>
+  </ul>
+<% else %>
+<div class="center-content">
+  <br><br><br>
+  <h2 class="title" style="font-size: 4vh;">Bienvenido a BrawlerHub</h2>
+  <br><br>
+  <h2 class="subtitle">Debes ingresar/registrarte para acceder a las actividades</h2>
+</div>
+<% end %>

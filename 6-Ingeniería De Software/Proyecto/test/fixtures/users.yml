@@ -1,0 +1,20 @@
+one:
+  name: Nicolas Hormann
+  email: nhc@uc.cl
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'prueba1234') %>
+  phone: '12345'
+  description: El mas capo de software
+
+two:
+  name: Cristobal Hormann
+  email: chc@uc.cl
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'prueba1234') %>
+  phone: '121455'
+  description: El menos seco de discretas
+
+three:
+  name: Adminsoftware
+  email: admin@uc.cl
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'claveadmin') %>
+  phone: '133'
+  description: Soy el admin

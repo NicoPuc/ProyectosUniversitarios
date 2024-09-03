@@ -1,0 +1,51 @@
+<div class="center-content">
+  <h2>Crear Actividad</h2>
+
+  <% if user_signed_in? %>
+    <%= form_for(@actividad) do |f| %>
+      <div class="field">
+        <%= f.label :titulo, "Titulo" %>
+        <br />
+        <%= f.text_field :titulo, class: "input", autofocus: true, autocomplete: "titulo" %>
+      </div>
+
+      <div class="field">
+        <br>
+        <%= f.label :cantidad_personas, "Cantidad personas" %><br />
+        <%= f.number_field :cantidad_personas, class: "input", autofocus: true, autocomplete: "cantidad_personas" %>
+      </div>
+
+      <div class="field">
+        <br>
+        <%= f.label :precio, "Precio" %><br />
+        <%= f.number_field :precio, class: "input", autofocus: true, autocomplete: "precio" %>
+      </div>
+
+      <div class="field">
+        <br>
+        <%= f.label :fecha, "Fecha" %><br />
+        <%= f.date_field :fecha, class: "input", autofocus: true, autocomplete: "fecha" %>
+      </div>
+
+      <br>
+      <div class="actions">
+        <button type="submit" class="Btn thick-btn">Crear Actividad
+          <svg class="svg" viewBox="0 0 24 24">
+            <line y2="19" y1="5" x2="12" x1="12"></line>
+            <line y2="12" y1="12" x2="19" x1="5"></line>
+          </svg>
+        </button>
+      </div>
+    <% end %>
+  <% else %>
+    <h2>Debes ingresar/registrarte para editar la actividad</h2>
+  <% end %>
+  <br><br><br>
+  <div class="actions">
+    <button class="Btn Btn--grey" onclick="history.back();">Volver
+      <svg class="svg" viewBox="0 0 46 40">
+        <path transform="rotate(180 23 20)" d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z"></path>
+      </svg>
+    </button>
+  </div>
+</div>

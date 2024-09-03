@@ -1,0 +1,79 @@
+<div class="center-content">
+  <% if user_signed_in? %>
+    <br><br><br>
+    <h2 class="title"><%= @actividad.titulo %></h2>
+    <div class="column">
+      <a class="content"><strong>Cantidad de personas: </strong><%= @actividad.cantidad_personas %></a>
+      <br>
+      <a class="content"><strong>Precio: </strong>$<%= @actividad.precio %></a>
+      <br>
+      <a class="content"><strong>Fecha: </strong><%= @actividad.fecha %></a>
+    </div>
+    <div class="action actions-inline">
+      <% if @actividad.user == current_user %>
+        <%= link_to edit_actividad_path(@actividad), class: "Btn thick-btn" do %>
+          Editar Actividad
+          <svg class="svg" viewBox="0 0 512 512">
+            <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path>
+          </svg>
+        <% end %>
+        <%= link_to actividad_path(@actividad), method: :delete, data: { turbo_method: :delete }, class: "Btn thick-btn Btn--red" do %>
+          Eliminar Actividad
+          <svg class="svg" viewBox="0 0 24 24">
+            <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path>
+          </svg>
+        <% end %>
+      <% end %>
+    </div>
+    
+    <% if @actividad.user.id == current_user.id %>
+    <br><br><br>
+      <h2 class="title">Solicitudes recibidas:</h2>
+      <% @actividad.requests.each do |request| %>
+        <% if request.status == 'pending' %>
+          <p class="content"><strong>Nombre: </strong><%= request.user.name %></p>
+          <p class="content"><strong>Estado: </strong><%= request.status %></p>
+          <div class="actions">
+            <%= form_with url: accept_request_path(request), method: :put do %>
+              <button class="Btn">Aceptar
+                <svg class="svg" viewBox="0 0 512 512">
+                  <path d="M256 32C132.3 32 32 132.3 32 256s100.3 224 224 224 224-100.3 224-224S379.7 32 256 32zm121.9 278.6L273.4 424c-7.4 7.4-17.7 11.4-28.5 11.4-10.8 0-21.1-4.1-28.5-11.4L134.1 310.6c-15.7-15.7-15.7-41.2 0-56.9L216 172.9c15.7-15.7 41.2-15.7 56.9 0l112.9 112.9c15.6 15.8 15.6 41.3 0 56.9zM177 216.6l-41.4 41.4L206.6 329c4.3 4.3 10.1 6.7 16.2 6.7s11.9-2.4 16.2-6.7L330 193.9l41.4 41.4-56.9 56.9L220.9 273c-8.6-8.6-22.4-8.6-31 0L177 216.6z"></path>
+                </svg>
+              </button>
+            <% end %>
+            <%= form_with url: reject_request_path(request), method: :put do %>
+              <button class="Btn Btn--red">Rechazar
+                <svg class="svg" viewBox="0 0 24 24">
+                  <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path>
+                </svg>
+              </button>
+            <% end %>
+            <% end %>
+      <% end %>
+
+      <br><br><br>
+          <h2 class="title">Reseñas:</h2>
+          <% @actividad.reviews.each do |review| %>
+            <div class="content column">
+              <a><strong>Calificación:</strong> <%= review.rating %></a>
+              <br>
+              <a><strong>Comentario:</strong> <%= review.content %></a>
+              <br>
+              <a><strong>Autor:</strong> <%= review.user.name %></a>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+  <% else %>
+    <h2 class="title">Debes ingresar/registrarte para ver la actividad</h2>
+  <% end %>
+
+  <br><br><br>
+  <div class="actions">
+    <button class="Btn Btn--grey" onclick="history.back();">Volver
+      <svg class="svg" viewBox="0 0 46 40">
+        <path transform="rotate(180 23 20)" d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z"></path>
+      </svg>
+    </button>
+  </div>
+</div>

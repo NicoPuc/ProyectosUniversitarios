@@ -1,0 +1,53 @@
+<div class="center-content">
+  <br><br>
+  <h2 class="title">
+    Chat con <%= @chat.user1 == current_user ? @chat.user2.name : @chat.user1.name %>
+  </h2>
+
+  <div class="chat-messages">
+  <% @messages.each do |message| %>
+    <% if message.user == current_user %>
+      <div class="message message-user">
+        <strong>Yo:</strong>
+        <p style="color: #000;"><%= message.content %></p>
+      </div>
+    <% else %>
+      <div class="message message-other">
+        <strong><%= message.user.name %>:</strong>
+        <p style="color: #000;"><%= message.content %></p>
+      </div>
+    <% end %>
+  <% end %>
+  <%= form_with(model: @message, url: chat_messages_path(@chat), class: 'mt-3') do |f| %>
+    <%= f.hidden_field :chat_id, value: @chat.id %>
+    <div class="field actions-inline" style="align-items: center; width: 400px;">
+      <%= f.text_area :content, class: 'input auto-expand', placeholder: 'Escribe un mensaje...', autocomplete: 'off', style: 'color:#000; text-align: left; overflow-y:hidden;', rows: 1 %>
+
+      <button type="submit" name="commit" class="Btn thick-btn">
+        Enviar
+        <svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+          <path fill="none" d="M0 0h24v24H0z"></path>
+          <path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
+        </svg>
+      </button>
+    </div>
+  <% end %>
+</div>
+
+  <br><br><br>
+  <div class="actions actions-inline">
+    <button class="Btn Btn--grey thick-btn" onclick="history.back();">Volver
+      <svg class="svg" viewBox="0 0 46 40">
+        <path transform="rotate(180 23 20)" d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z"></path>
+      </svg>
+    </button>
+
+    <%= link_to chat_path(@chat), method: :delete, data: { turbo_method: :delete }, class: "Btn Btn--red thick-btn" do %>
+      Eliminar chat
+      <svg class="svg" viewBox="0 0 24 24">
+        <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path>
+      </svg>
+    <% end %>
+  </div>
+  
+</div>

@@ -1,0 +1,45 @@
+<div class="center-content">
+  <br><br>
+  <h2 class="title">Mis Chats</h2>
+  <% if @chats.empty? %>
+    <p class="content">No tienes chats actuales.</p>
+  <% else %>
+    <ul class="content">
+      <% @chats.each do |chat| %>
+        <li>
+          <%= link_to chat_path(chat), class: "Btn thick-btn" do %>
+            <strong><%= chat.user1 == current_user ? chat.user2.name : chat.user1.name %></strong>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <br><br><br>
+
+
+  <h2 class="title">Iniciar chat con otros usuarios</h2>
+  <br>
+  <% if @actividads_without_chat.empty? %>
+    <p class="content">No hay actividades disponibles para iniciar chat.</p>
+  <% else %>
+    <% @actividads_without_chat.each do |actividad| %>
+    <p class="content"><strong>Actividad: </strong><%= actividad.titulo %></p>
+      <%= form_with(model: Chat.new, url: chats_path, class: "form-inline") do |f| %>
+        <%= f.hidden_field :user1_id, value: current_user.id %>
+        <%= f.hidden_field :user2_id, value: actividad.user.id %>
+        <%= f.hidden_field :actividad_id, value: actividad.id %>
+        <div class="actions">
+          <button type="submit" class="Btn thick-btn">
+            <%= actividad.user.name %>
+            <svg class="svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 664 663" width="24" height="24">
+              <path fill="none" d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888"></path>
+              <path stroke-linejoin="round" stroke-linecap="round" stroke-width="33.67" stroke="#6c6c6c" d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888"></path>
+            </svg>
+          </button>
+        </div>
+      <br><br>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

@@ -1,0 +1,292 @@
+body {
+  background-color: rgb(61, 61, 61);
+  margin: 20px
+}
+
+@font-face {
+  font-family: 'Nougat';
+  src: url('nougat-extrablack.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.center-content {
+  text-align: center;
+  color: white;
+  font-family: 'Nougat', monospace; /* Aplicar monospace a todo el contenido */
+}
+
+.NavBar {
+  background-color: #ffc107; /* Color de fondo del botón "Play" */
+  padding: 5px;
+  font-family: 'Nougat', monospace; /* Cambiar la fuente a Nougat */
+  font-size: 3vh;
+  font-style: normal;
+  width: fit-content;
+  text-align: center;
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 20px; /* Esquinas redondeadas */
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3); /* Sombra similar al botón "Play" */
+}
+
+.NavBar a {
+  display: inline-block;
+  padding: 10px 20px;
+  color: #ffffff; /* Color del texto */
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; /* Borde negro */
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border-radius: 20px; /* Esquinas redondeadas */
+  font-weight: bold;
+}
+
+.NavBar a:hover {
+  background-color: #a37a00; /* Color de hover similar al botón "Play" */
+  box-shadow: 0 0 10px #666; /* Sombra en hover */
+  border-radius: 20px; /* Esquinas redondeadas en hover */
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  margin: 0 2px 0 2px;
+  font-family: 'Nougat', monospace;
+}
+
+h1 {
+  text-decoration: none;
+  color:antiquewhite;
+  margin: 0 2px 0 2px;    
+}
+
+h2 {
+  padding: 5px;
+  font-family: 'Nougat', monospace; /* Cambiar la fuente a Nougat */
+  font-size: 3vh;
+  font-style: normal;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+p {
+  text-decoration: none;
+  color:antiquewhite;
+  margin: 0 2px 0 2px;
+}
+
+.details {
+  color: white; /* Cambiar el color a blanco */
+}
+
+li {
+  list-style-type: none;
+}
+
+.ImagenIndex {
+  max-width: 45vw;
+  display: block;
+  border: none;
+}
+
+.DescripcionIndex {
+  max-width: 45vw;
+  text-align: center;
+  border: none;
+  font-size: 3vw;
+  font-family: 'Nougat', monospace; /* Cambiar la fuente a Nougat */
+  color: white;
+}
+
+.ContainerIndex {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  list-style-type: none;
+}
+
+.field {
+  font-size: 1.3vw;
+  font-family: 'Nougat', monospace; /* Cambiar la fuente a Nougat */
+  color: white;
+}
+
+.input {
+  color: white;
+  border: 2px solid #ffc107;
+  border-radius: 10px;
+  padding: 10px 25px;
+  background: transparent;
+  font-family: 'Nougat', monospace;
+  width: 100%; /* Ancho completo */
+  max-width: 250px; /* Ajustar según el diseño */
+  text-align: center; /* Centrar el texto */
+}
+
+.input:active {
+  box-shadow: 2px 2px 15px #ffc107 inset;
+}
+
+.Btn {
+  position: relative;
+  background-color: #ffc107;
+  box-shadow: 5px 5px 0px #a67e05;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centrar contenido */
+  width: 200px; /* Ajustar ancho fijo */
+  height: 50px; /* Ajustar altura fija */
+  border: none;
+  padding: 0px 20px;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 10px;
+  transition-duration: .3s;
+  margin: 10px auto; /* Centrar el botón y agregar espacio entre botones */
+}
+
+.Btn--grey {
+  background-color: #9d9d9d;
+  box-shadow: 5px 5px 0px #2c2c2c;
+}
+.Btn--red {
+  background-color: #ff0000;
+  box-shadow: 5px 5px 0px #800909;
+}
+.Btn--green {
+  background-color: #0ac70a;
+  box-shadow: 5px 5px 0px #098009;
+}
+.little-btn {
+  width: 100px;
+  height: 30px;
+  font-size: 12px;
+  padding: 0;
+  margin: 0;
+}
+
+.svg {
+  width: 13px;
+  position: absolute;
+  right: 0;
+  margin-right: 20px;
+  fill: white;
+  transition-duration: .3s;
+}
+
+.Btn:hover {
+  color: transparent;
+}
+
+.Btn:hover svg {
+  right: 43%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  transition-duration: .3s;
+}
+
+.Btn:active {
+  transform: translate(3px , 3px);
+  transition-duration: .3s;
+  box-shadow: 2px 2px 0px #ffc107;
+}
+
+.thick-btn {
+  font-family: 'Nougat', monospace;
+  font-style: normal;
+  width: 200px; /* Aumentar la altura */
+}
+
+.button-style {
+  display: inline-block;
+  padding: 10px 20px;
+  color: #ffffff; /* Color del texto */
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; /* Borde negro */
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border-radius: 20px; /* Esquinas redondeadas */
+  font-weight: bold;
+  background-color: #ffc107; /* Color de fondo */
+  box-shadow: 0 0 10px #666; /* Sombra */
+}
+
+.button-style:hover {
+  background-color: #a37a00; /* Color de hover */
+  box-shadow: 0 0 10px #666; /* Sombra en hover */
+  border-radius: 20px; /* Esquinas redondeadas en hover */
+}
+
+.actions {
+  text-align: center;
+}
+.actions-inline {
+  display: inline-flex;
+  grid-template-columns: repeat(2, 1fr); /* Ajusta según la cantidad de botones */
+  gap: 10px; /* Reduce este valor para disminuir el espacio entre botones */
+  justify-content: space-between;
+  text-align: center;
+}
+
+.title {
+  padding: 5px;
+  font-family: 'Nougat', monospace;
+  font-size: 3vh;
+  font-style: normal;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.subtitle {
+  padding: 5px;
+  font-family: 'Nougat', monospace;
+  font-size: 2.5vh;
+  font-style: normal;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  color: white;
+}
+
+.content {
+  font-family: 'Nougat', monospace;
+  font-size: 2vh;
+  color: white;
+}
+
+
+.chat-messages {
+  background-color: #f2f2f2; /* Color de fondo claro */
+  border-radius: 20px; /* Bordes redondeados */
+  padding: 20px; /* Espaciado interno */
+  max-width: 60%; /* Ancho máximo del contenedor */
+  margin: 20px auto; /* Centrado y con margen respecto a los elementos adyacentes */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave para darle profundidad (opcional) */
+  max-width: 500px;
+
+}
+
+.message {
+  max-width: 80%;
+  padding: 10px;
+  margin-bottom: 10px;
+  position: relative;
+  word-wrap: break-word;
+  border-radius: 18px;
+  text-align: left;
+  color:#000;
+}
+
+/* Mensajes del usuario */
+.message-user {
+  margin-left: auto;
+  background-color: #DCF8C6; /* Color de fondo para los mensajes del usuario */
+  border-bottom-right-radius: 0px; /* Ajusta el borde inferior derecho para la punta */
+}
+
+
+
+/* Mensajes de otros */
+.message-other {
+  margin-right: auto;
+  background-color: #E5E5EA; /* Color de fondo para los mensajes de otros */
+  border-bottom-left-radius: 0px; /* Ajusta el borde inferior izquierdo para la punta */
+}

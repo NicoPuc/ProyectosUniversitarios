@@ -1,0 +1,13 @@
+one:
+  titulo: Clases Brawlstars
+  cantidad_personas: 5
+  precio: 1500
+  fecha: 2024-07-29
+  user: two
+
+two:
+  titulo: Precentacion final
+  cantidad_personas: 3
+  precio: 0
+  fecha: 2024-06-15
+  user: one

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Grupo27</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+  <body>
+    <header>
+      <nav class='NavBar'>
+        <%= link_to 'Inicio', root_path, class: (current_page?(root_path) ? 'active' : '') %>
+        <% if user_signed_in? %>
+          <%= link_to 'Actividades', actividads_path, class: (current_page?(actividads_path) ? 'active' : '') unless current_page?(actividads_path) %>
+          <%= link_to 'Solicitudes', requests_path, class: (current_page?(requests_path) ? 'active' : '') unless current_page?(requests_path) %>
+          <%= link_to 'Chats', chats_path, class: (current_page?(chats_path) ? 'active' : '') unless current_page?(chats_path) %>
+          <%= link_to 'Reseñas', reviews_path, class: (current_page?(reviews_path) ? 'active' : '') unless current_page?(reviews_path) %>
+          <%= link_to 'Editar Perfil', edit_user_registration_path, class: (current_page?(edit_user_registration_path) ? 'active' : '') unless current_page?(edit_user_registration_path) %>
+          <%= link_to 'Cerrar Sesión', destroy_user_session_path, method: :delete, class: 'logout' %>
+        <% else %>
+          <%= link_to 'Iniciar Sesión', new_user_session_path, class: 'signin' %> 
+          <%= link_to 'Registrarse', new_user_registration_path, class: 'signup' %>
+        <% end %>
+      </nav>
+    </header>
+    <main>
+      <%= yield %>
+    </main>
+  </body>

@@ -1,0 +1,14 @@
+<h1>Solicitudes de Actividad para <%= @actividad.titulo %></h1>
+
+<% @requests.each do |request| %>
+  <% if @actividad.user == current_user%>
+    <p>
+      <%= request.actividad.titulo %>
+      <%= request.description %>
+      <%= link_to 'Aceptar', accept_request_path(request), method: :put, data: { confirm: '¿Estás seguro de que quieres aceptar esta solicitud?' } %>
+      <%= link_to 'Rechazar', reject_request_path(request), method: :put, data: { confirm: '¿Estás seguro de que quieres rechazar esta solicitud?' } %>
+    </p>
+  <%else%>
+    <h1>Hola</h1>
+  <% end %>
+<% end %>

@@ -1,0 +1,8 @@
+<div class="center-content">
+  <% if user_signed_in? %>
+    <h2 class="title"><%= action_name == 'new' ? 'Crear Solicitud' : 'Editar Solicitud' %></h2>
+    <%= render 'form' %>
+  <% else %>
+    <h2 class="title">Debes ingresar/registrarte para editar la solicitud</h2>
+  <% end %>
+</div>

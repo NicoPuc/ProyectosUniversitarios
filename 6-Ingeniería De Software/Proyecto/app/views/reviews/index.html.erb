@@ -1,0 +1,30 @@
+<div class="center-content">
+  <h2 class="title">Reseñas</h2>
+
+  <% actividades_disponibles = Actividad.where.not(user: current_user)
+    .where.not(id: Review.where(user: current_user).select(:actividad_id))
+  %>
+
+  <div class="actions">
+    <% if actividades_disponibles.any? %>
+      <%= link_to new_review_path, class: "Btn thick-btn" do %>
+        Crear reseña
+        <svg class="svg" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg>
+      <% end %>
+    <% else %>
+      <h2 class="subtitle">No hay actividades disponibles para hacer una reseña</h2>
+    <% end %>
+  </div>
+
+  <br><br>
+        <h2 class="subtitle">Mis Reseñas</h2>
+  <% @reviews.each do |review| %>
+    <div class="content">
+      <%= link_to review_path(review.id), class: "Btn thick-btn" do %>
+        <%= review.actividad.titulo %>
+      <% end %>
+      <h4>Creada por: <%= review.user.name %></h4>
+    </div>
+    <br>
+  <% end %>
+</div>

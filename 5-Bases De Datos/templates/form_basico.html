@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupo 65</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+</head>
+<body>
+    <video autoplay muted loop id="video-fondo">
+        <source src="/static/1118553_4k_Form_Graphic_1280x720.mp4" type="video/mp4">
+        Tu navegador no soporta el video HTML5.
+    </video>
+    <div class="contenedor">
+        <form action="/procesar/" method="POST">
+            <div class="grupo-formulario">
+                <label for="atributoA" class="etiqueta">SELECT:</label>
+                <input type="text" id="atributoA" name="atributoA" class="campo-input">
+            </div>
+
+            <div class="grupo-formulario">
+                <label for="atributoB" class="etiqueta">FROM:</label>
+                <input type="text" id="atributoB" name="atributoB" class="campo-input">
+            </div>
+
+            <div class="grupo-formulario">
+                <label for="atributoC" class="etiqueta">WHERE:</label>
+                <input type="text" id="atributoC" name="atributoC" class="campo-input">
+            </div>
+
+            <div class="btn-container">
+                <button type="submit" class="btn">Buscar</button>
+            </div>
+        </form>
+    </div>
+    <a href="/" class="volver">Volver</a>
+</body>
+</html>

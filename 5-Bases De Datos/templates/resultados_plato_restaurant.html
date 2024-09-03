@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados de la Consulta</title>
+</head>
+
+<body>
+    <h1>Restaurantes con el Plato: {{ plato }}</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Restaurante</th>
+                <th>Plato</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if resultados %}
+                {% for row in resultados %}
+                    <tr>
+                        <td>{{ row[0] }}</td>
+                        <td>{{ row[1] }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="2">{{ mensaje }}</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+    <a href="/" class="volver">Volver</a>
+</body>
+
+</html>
