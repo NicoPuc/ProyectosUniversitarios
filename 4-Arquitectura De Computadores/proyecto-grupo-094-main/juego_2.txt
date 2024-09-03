@@ -1,0 +1,165 @@
+// Juego de Reacción
+
+DATA:
+led 0 // Salida
+sw 0 // Entrada
+display 0 // Salida
+button 0 // Entrada
+sec 0 // Entrada
+msec 0 // Entrada
+usec 0 // Entrada
+lcd 0 // Salida
+
+score_player1 0
+score_player2 0
+button_player1 0
+button_player2 0
+current_player 0
+round 0
+
+sec_prevtime 0
+sec_aftertime 0
+msec_prevtime 0
+// msec_aftertime 0
+sec_time 0
+msec_time 0
+winner 0
+dummy_countdown 0
+
+restart_var 1
+
+debouncer_var 300
+
+
+CODE:
+new_game: //Se inicia un nuevo juego
+MOV A,0
+MOV (led),A
+MOV A,(sw)
+waiting_loop: // Inicialización del juego
+    MOV B,(sw)
+    CMP A,B
+    JEQ waiting_loop
+
+/////// juego 2
+// round 1 p1
+start_game: 
+MOV A, 1
+MOV (display),A
+MOV A, 0
+p_one_turn_loop:
+    CALL waiting_move
+    CMP A, B
+    JEQ p_one_turn_loop
+
+MOV (button_player1), B
+
+// fin turno 1 p1
+
+// delay
+
+// round 1 p2
+MOV A, 2
+MOV (display),A
+MOV A, 0
+p_two_turn_loop:
+    CALL waiting_move
+    CMP A, B
+    JEQ p_two_turn_loop
+
+MOV (button_player2), B
+
+
+// fin turno 1 p2
+
+// comparamos resultados turno 1
+
+JMP round_result
+
+round_result: //subrutina que muestra el número del que aprieta su botón en el display
+    MOV A,(button_player1) // B = estado de los botones
+    CMP A, 2
+    JEQ saco_papel
+    CMP A, 4
+    JEQ saco_piedra
+    CMP A, 8
+    JEQ saco_tijera
+    CMP A, 16
+    JEQ saco_pegamento
+
+saco_papel:
+    ADD A, 2 // papel vs piedra
+    CMP A, (button_player2)
+    JEQ gano1
+    ADD A, 4 // papel vs tijera
+    CMP A, (button_player2)
+    JEQ perdio1
+    ADD A, 8 // papel vs pegamento
+    CMP A, (button_player2)
+    JEQ perdio1
+    JMP empate
+
+saco_piedra:
+    SUB A, 2 // piedra vs papel
+    CMP A, (button_player2)
+    JEQ perdio1
+    ADD A, 6 // piedra vs tijera
+    CMP A, (button_player2)
+    JEQ gano1
+    ADD A, 8 // piedra vs pegamento
+    CMP A, (button_player2)
+    JEQ gano1
+    JMP empate
+
+saco_tijera:
+    SUB A, 6 // tijera vs papel
+    CMP A, (button_player2)
+    JEQ gano1
+    ADD A, 2 // tijera vs piedra
+    CMP A, (button_player2)
+    JEQ perdio1
+    ADD A, 12 // tijera vs pegamento
+    CMP A, (button_player2)
+    JEQ perdio1
+    JMP empate
+
+saco_pegamento:
+    SUB A, 14 // pegamento vs papel
+    CMP A, (button_player2)
+    JEQ gano1
+    ADD A, 2 // pegamento vs piedra
+    CMP A, (button_player2)
+    JEQ perdio1
+    ADD A, 4 // pegamento vs tijera
+    CMP A, (button_player2)
+    JEQ gano1
+    JMP empate
+
+perdio1:
+    INC (score_player2)
+    MOV A, 2
+    MOV (display),A
+    JMP next_round
+
+gano1:
+    INC (score_player1)
+    MOV A, 1
+    MOV (display),A
+    JMP next_round
+
+empate:
+    MOV A, 100
+    MOV (display),A
+    JMP next_round
+
+next_round:
+    MOV A,0
+    JMP new_game
+  
+
+waiting_move:
+    MOV B,(button) 
+RET
+
+/////// juego 2 fin
+

@@ -1,0 +1,162 @@
+// Juego de Reacción
+
+DATA:
+led 0 // Salida
+sw 0 // Entrada
+display 0 // Salida
+button 0 // Entrada
+sec 0 // Entrada
+msec 0 // Entrada
+usec 0 // Entrada
+lcd 0 // Salida
+
+button_player1 0 // Entrada para el jugador 1
+button_player2 0 // Entrada para el jugador 2
+winner 0 // Salida para indicar el ganador
+choice_player1 0 // Elección del jugador 1
+choice_player2 0 // Elección del jugador 2
+
+CODE:
+  new_game: // Inicia un nuevo juego
+      MOV A, 0
+      MOV (led), A
+      MOV (winner), A
+      MOV (choice_player1), A
+      MOV (choice_player2), A
+  
+      // Esperar elecciones de los jugadores
+      CALL wait_for_choices
+  
+      // Comparar elecciones y determinar el ganador
+      CALL determine_winner
+  
+      // Mostrar el ganador
+      CALL display_winner
+  
+      // Opcional: reiniciar el juego o finalizar
+      JMP new_game
+
+
+wait_for_choices:
+    // Espera a que el jugador 1 haga su elección
+    MOV A, 0
+    wait_player1:
+        MOV B, (button_player1)
+        CMP B, 0
+        JEQ wait_player1
+        MOV (choice_player1), B
+
+    // Espera a que el jugador 2 haga su elección
+    MOV A, 0
+    wait_player2:
+        MOV B, (button_player2)
+        CMP B, 0
+        JEQ wait_player2
+        MOV (choice_player2), B
+
+    RET
+
+determine_winner:
+    MOV A, (choice_player1)
+    MOV B, (choice_player2)
+
+    // Comprueba si los jugadores eligieron lo mismo (empate)
+    CMP A, B
+    JEQ tie_game
+
+    // Compara las elecciones y determina el ganador
+    CMP A, 4 // Jugador 1 eligió Piedra
+    JE player1_chose_rock
+    CMP A, 2 // Jugador 1 eligió Papel
+    JE player1_chose_paper
+    CMP A, 8 // Jugador 1 eligió Tijeras
+    JE player1_chose_scissors
+    CMP A, 10 // Jugador 1 eligió Lagarto
+    JE player1_chose_lizard
+
+    tie_game:
+        MOV (winner), 0 // Empate
+        RET
+
+player1_chose_rock:
+    CMP B, 8 // Piedra vs Tijeras
+    JE player1_wins
+    CMP B, 10 // Piedra vs Lagarto
+    JE player1_wins
+    JMP player2_wins
+
+player1_chose_paper:
+    CMP B, 4 // Papel vs Piedra
+    JE player1_wins
+    CMP B, 10 // Papel vs Lagarto
+    JE player1_wins
+    JMP player2_wins
+
+player1_chose_scissors:
+    CMP B, 2 // Tijeras vs Papel
+    JE player1_wins
+    CMP B, 10 // Tijeras vs Lagarto
+    JE player1_wins
+    JMP player2_wins
+
+player1_chose_lizard:
+    CMP B, 2 // Lagarto vs Papel
+    JE player1_wins
+    CMP B, 4 // Lagarto vs Piedra
+    JE player1_wins
+    JMP player2_wins
+
+    player1_wins:
+        MOV (winner), 1
+        RET
+
+    player2_wins:
+        MOV (winner), 2
+        RET
+
+display_winner:
+    MOV A, (winner)
+    CMP A, 0
+    JE tie_display
+    CMP A, 1
+    JE player1_wins_display
+    CMP A, 2
+    JE player2_wins_display
+
+tie_display:
+    MOV A, 5 // Cantidad de veces que parpadearán los LEDs
+    tie_loop:
+        MOV (led), 0xFF // Suponiendo que encender todos los LEDs es representado por 0xFF
+        CALL delay
+        MOV (led), 0x00 // Apagar todos los LEDs
+        CALL delay
+        DEC A
+        CMP A, 0
+        JNE tie_loop
+    RET
+
+
+    player1_wins_display:
+    MOV (led), 0x01 // Encender LED 1, suponiendo que 0x01 representa el LED del jugador 1
+    CALL delay // Mantener el LED encendido por un momento
+    MOV (led), 0x00 // Apagar el LED
+    RET
+
+
+player2_wins_display:
+    MOV (led), 0x02 // Encender LED 2, suponiendo que 0x02 representa el LED del jugador 2
+    CALL delay // Mantener el LED encendido por un momento
+    MOV (led), 0x00 // Apagar el LED
+    RET
+      
+delay:
+    PUSH A
+    MOV A, 255 // Un valor arbitrario para el delay
+    delay_loop:
+        DEC A
+        CMP A, 0
+        JNE delay_loop
+    POP A
+    RET
+
+

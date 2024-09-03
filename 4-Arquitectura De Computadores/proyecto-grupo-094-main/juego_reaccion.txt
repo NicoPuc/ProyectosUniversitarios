@@ -1,0 +1,116 @@
+// Juego de Reacción
+
+DATA:
+led 0 // Salida
+sw 0 // Entrada
+display 0 // Salida
+button 0 // Entrada
+sec 0 // Entrada
+msec 0 // Entrada
+usec 0 // Entrada
+lcd 0 // Salida
+
+sec_prevtime 0
+sec_aftertime 0
+msec_prevtime 0
+// msec_aftertime 0
+sec_time 0
+msec_time 0
+winner 0
+dummy_countdown 0
+
+
+
+CODE:
+new_game: //Se inicia un nuevo juego
+MOV A,0
+MOV (led),A
+MOV A,(sw)
+waiting_loop: // Inicialización del juego
+    CALL show_player //En caso de presionar un botón se muestra el número del jugador en el display
+    MOV B,(sw)
+    CMP A,B
+    JEQ waiting_loop
+
+CALL count_down_display //Se cuenta de 5 a 0
+CALL race_display //Se detecta el jugador que haya presionado su botón más rápido
+
+MOV A,(sw)
+MOV B,(sw)
+restart_loop:
+    MOV A,(sw)
+    CMP A,B
+    JEQ restart_loop
+JMP new_game
+
+show_player: //subrutina que muestra el número del que aprieta su botón en el display
+    PUSH B
+        MOV B,(button) // B = estado de los botones
+        MOV (2),B // Se muestra B en el display
+    POP B
+RET
+
+count_down_display: //subrutina de cuenta regresiva en el display
+    PUSH B
+    PUSH A
+
+
+        MOV A,5
+        ADD A,(sec)
+        MOV (dummy_countdown), A
+        MOV B, 0
+
+        loop_display_counter:
+        SUB A,(sec)
+        MOV (display),A
+        CMP A, B
+        JEQ Salir
+        MOV A, (dummy_countdown)
+        JMP loop_display_counter
+
+Salir:
+    POP B // Se carga B y A con valores previos
+    POP A
+RET // Se retorna el PC a la posición siguiente desde donde se llamó a la subrutina
+
+race_display: // subrutina de "carrera" por presionar antes el botón (detecta qué jugador gana)
+    PUSH B //Guardar B y A
+    PUSH A
+        MOV B, (sec)
+        MOV (sec_prevtime), B //Tiempo actual se guarda en la variable sec_prevtime y msec_prevtime
+        MOV B, (msec) 
+        MOV (msec_prevtime), B 
+        CALL waiting_push //llama a la subrutina que espera el boton más rápido presionado
+        MOV A, (winner)
+        MOV (display), A //Display del ganador
+        MOV B, (sec_prevtime)
+        MOV A, (sec) //Tiempo actual se guarda en A
+        SUB A, B // La diferencia nos entrega el tiempo del botón
+        MOV (sec_time), A //Se guarda ese tiempo en sec
+        
+        MOV B, (msec_prevtime)
+        MOV A, (msec) //Tiempo actual se guarda en A
+        SUB A,B //Análogo al caso anterior pero en msec
+        MOV (msec_time), A //Se guarda ese tiempo en msec
+        
+
+        MOV B, (sec_time)
+        MOV A, (msec_time)
+        ADD A,B
+        MOV (led), A
+    POP B
+    POP A
+RET
+
+waiting_push:
+    PUSH B
+    PUSH A
+        MOV B, 0
+        waiting_push_loop:
+            MOV A, (button)
+            CMP A, B
+            JEQ waiting_push_loop
+            MOV (winner), A
+    POP B
+    POP A
+RET

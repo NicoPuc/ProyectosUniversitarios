@@ -1,0 +1,28 @@
+DATA:
+
+ contador 0
+ resultado 0
+ num1 4
+ num2 2
+
+CODE:
+
+MOV A, (num1)
+MOV B, (num2)
+MOV (contador), A
+JMP mult
+
+mult:
+ CMP A, 0
+ JEQ end
+ MOV A, (num2)
+ ADD A, (resultado)
+ MOV (resultado), A
+ MOV A, (contador)
+ SUB A, 1
+ MOV (contador), A
+ JMP mult
+
+end:
+ MOV A, (resultado)
+ JMP end
