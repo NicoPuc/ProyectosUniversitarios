@@ -1,0 +1,8 @@
+*.pdf
+obj/
+/linux-4.17.4.tar.xz
+wget-log
+/.vscode
+tests/
+oscheduler
+output.csv
