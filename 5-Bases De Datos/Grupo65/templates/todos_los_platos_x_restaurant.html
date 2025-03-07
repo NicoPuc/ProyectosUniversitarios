@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Platos por Restaurante</title>
+</head>
+<body>
+    <h1>Platos por Restaurante</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Restaurante</th>
+                <th>Plato</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in resultados %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="/" class="volver">Volver</a>
+</body>
+</html>
+

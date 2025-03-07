@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Platos por Alergia</title>
+</head>
+<body>
+    <h1>Platos con el Ingrediente: {{ alergia }}</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Plato</th>
+                <th>Ingrediente</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if resultados %}
+                {% for row in resultados %}
+                    <tr>
+                        <td>{{ row[0] }}</td>
+                        <td>{{ row[1] }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="2">{{ mensaje }}</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+    <a href="/" class="volver">Volver</a>
+</body>
+</html>
